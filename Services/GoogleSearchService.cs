@@ -13,11 +13,13 @@ namespace InzioTest.Services
         private readonly string _apiKey = "AIzaSyAsxWF-DmWLzzMLYCJYTvw10z6v8Ct4pwo";
         private readonly string _searchEngineId = "d0a3f265e786844b9";
 
+        //Metoda pro vyhledavani pomoci Google API
         public async Task<List<SearchResult>> SearchAPIAsync(string keyword)
         {
             using (var httpClient = new HttpClient())
             {
-                var encodedKeyword = Uri.EscapeDataString(keyword);//Potreba prevest na URL format problem se specialnimy znaky asi hodit do metody
+                var encodedKeyword = Uri.EscapeDataString(keyword);//Potreba prevest na URL format problem se specialnimy znaky
+
                 var requestUrl = $"https://www.googleapis.com/customsearch/v1?q={encodedKeyword}&cx={_searchEngineId}&key={_apiKey}";
                 var response = await httpClient.GetAsync(requestUrl);
                 response.EnsureSuccessStatusCode();
@@ -33,8 +35,8 @@ namespace InzioTest.Services
                 {
                     results.Add(new SearchResult
                     {
-                        Title = item["title"].ToString(),
-                        Url = item["link"].ToString()
+                        Title = item["title"].ToString() ?? String.Empty,
+                        Url = item["link"].ToString() ?? String.Empty
                     });
                 }
 
@@ -42,6 +44,7 @@ namespace InzioTest.Services
             }
         }
 
+        //Metoda pro vyhledavani pomoci XPath
         public async Task<List<SearchResult>> SearchXPathAsync(string keyword)
         {
             using (var httpClient = new HttpClient())
@@ -49,12 +52,12 @@ namespace InzioTest.Services
                 var encodedKeyword = Uri.EscapeDataString(keyword);
                 var response = await httpClient.GetAsync($"https://www.google.com/search?q={encodedKeyword}");
                 var content = await response.Content.ReadAsStringAsync();
-                 
+
                 var htmlDocument = new HtmlDocument();
                 htmlDocument.LoadHtml(content);
 
                 var resultNodes = htmlDocument.DocumentNode.SelectNodes("//div[contains(@class, 'BNeawe vvjwJb AP7Wnd')]/ancestor::a");
-                
+
                 if (resultNodes == null)
                 {
                     return new List<SearchResult>();
