@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Projekty\\InizioTest\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\InzioTest.bundle.scp.css",
+      "PackagePath": "staticwebassets\\InzioTest.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Projekty\\InizioTest\\wwwroot\\RadekVala_CV.pdf",
+      "PackagePath": "staticwebassets\\RadekVala_CV.pdf"
+    },
+    {
+      "Id": "C:\\Projekty\\InizioTest\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Projekty\\InizioTest\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Projekty\\InizioTest\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Projekty\\InizioTest\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.InzioTest.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.InzioTest.props",
+      "PackagePath": "build\\InzioTest.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.InzioTest.props",
+      "PackagePath": "buildMultiTargeting\\InzioTest.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.InzioTest.props",
+      "PackagePath": "buildTransitive\\InzioTest.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

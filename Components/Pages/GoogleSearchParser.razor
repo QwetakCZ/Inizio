@@ -1,0 +1,70 @@
+﻿@inject InzioTest.Services.GoogleSearchService GoogleSearchService
+@inject InzioTest.Services.ConvertDataToJSON SaveData
+@inject IJSRuntime JS
+
+
+
+
+@page "/Search/Google/Parser"
+@rendermode InteractiveServer
+<PageTitle>Search on Google</PageTitle>
+<div class="container my-4">
+    <h2>Vyhledávání pomocí XPath</h2>
+    <div class="row justify-content mb-3">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Zadejte dotaz" @bind="searchQuery" />
+                <div class="input-group-append">
+                    <button class="btn btn-primary mx-3" @onclick="Search">Hledat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (vysledky == null)
+    {
+        <div class="alert alert-warning" role="alert">
+            Nebyly nalezeny žádné výsledky
+        </div>
+    }
+    else
+    {
+        @if (vysledky.Count > 0)
+        {
+            <div class="mb-3">
+                <button class="btn btn-outline-secondary" @onclick="Save">Uložit do souboru</button>
+            </div>
+        }
+
+        @foreach (var vysledek in vysledky)
+        {
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">@vysledek.Title</h5>
+                    <p class="card-text">
+                        <a href="@vysledek.Url" target="_blank" class="card-link">@vysledek.Url</a>
+                    </p>
+                </div>
+            </div>
+        }
+    }
+</div>
+@code {
+    private string searchQuery = string.Empty;
+    public List<Models.SearchResult> vysledky = new List<Models.SearchResult>();
+
+
+
+
+    private async void Search()
+    {
+        vysledky = await GoogleSearchService.SearchXPathAsync(searchQuery);
+        StateHasChanged();
+    }
+
+    private async void Save()
+    {
+        var json = SaveData.ConvertModelToJsonAsync(vysledky);
+        await JS.InvokeVoidAsync("downloadFile", "results.json", json);
+    }
+}
